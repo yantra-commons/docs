@@ -10,14 +10,11 @@ Yantra Commons uses established open licenses for hardware, firmware, and docume
 
 Hardware designs at Yantra Commons are released under the [CERN Open Hardware Licence (CERN OHL)](https://cern-ohl.web.cern.ch), the industry-standard license family for open hardware. CERN OHL comes in three variants with increasing levels of copyleft:
 
-**CERN-OHL-P — Permissive**
-The most permissive variant. You can use, modify, manufacture, and sell products based on the design without any obligation to publish your changes. If you modify the design and keep those changes private, that is permitted. You must retain the existing copyright notices and license text.
+**CERN-OHL-P — Permissive** The most permissive variant. You can use, modify, manufacture, and sell products based on the design without any obligation to publish your changes. If you modify the design and keep those changes private, that is permitted. You must retain the existing copyright notices and license text.
 
-**CERN-OHL-W — Weakly Reciprocal**
-Changes to the hardware design itself must be shared under the same license — but products that incorporate the hardware (your enclosure, your system, your product) do not need to be open. This variant is suitable when you want improvements to the core design to remain in the commons without requiring that every product built around it be open.
+**CERN-OHL-W — Weakly Reciprocal** Changes to the hardware design itself must be shared under the same license — but products that incorporate the hardware (your enclosure, your system, your product) do not need to be open. This variant is suitable when you want improvements to the core design to remain in the commons without requiring that every product built around it be open.
 
-**CERN-OHL-S — Strongly Reciprocal**
-The most protective variant. Any derivative of the design — modified schematics, revised PCB layouts, adapted firmware tied to the hardware — must also be released under CERN-OHL-S. If you manufacture and sell a product based on an OHL-S design, the complete design files for your version must be publicly available. This is the variant that most strongly ensures the design stays open.
+**CERN-OHL-S — Strongly Reciprocal** The most protective variant. Any derivative of the design — modified schematics, revised PCB layouts, adapted firmware tied to the hardware — must also be released under CERN-OHL-S. If you manufacture and sell a product based on an OHL-S design, the complete design files for your version must be publicly available. This is the variant that most strongly ensures the design stays open.
 
 Check the `LICENSE` file in each project's root directory to see which variant applies before you use or modify a design.
 
@@ -25,11 +22,9 @@ Check the `LICENSE` file in each project's root directory to see which variant a
 
 Firmware at Yantra Commons is typically released under one of two licenses:
 
-**MIT License**
-A permissive license with minimal conditions. You can use, copy, modify, and distribute the firmware — including in commercial and closed-source products — as long as you retain the original copyright notice and license text. If you ship a product that runs MIT-licensed firmware, you are not required to publish your modifications.
+**MIT License** A permissive license with minimal conditions. You can use, copy, modify, and distribute the firmware — including in commercial and closed-source products — as long as you retain the original copyright notice and license text. If you ship a product that runs MIT-licensed firmware, you are not required to publish your modifications.
 
-**GPL-2.0 or GPL-3.0**
-The GNU General Public Licence requires that if you distribute a product containing GPL-licensed firmware (including modified versions), you must also make the complete corresponding source code available to recipients under the same GPL license. This ensures that firmware improvements flow back to the community. GPL-3.0 adds additional protections around patent rights and hardware anti-circumvention compared to GPL-2.0.
+**GPL-2.0 or GPL-3.0** The GNU General Public Licence requires that if you distribute a product containing GPL-licensed firmware (including modified versions), you must also make the complete corresponding source code available to recipients under the same GPL license. This ensures that firmware improvements flow back to the community. GPL-3.0 adds additional protections around patent rights and hardware anti-circumvention compared to GPL-2.0.
 
 The `LICENSE` file and the `platformio.ini` header comments will tell you which firmware license a project uses.
 
@@ -38,6 +33,7 @@ The `LICENSE` file and the `platformio.ini` header comments will tell you which 
 Build guides, assembly instructions, and other written documentation at Yantra Commons are typically released under **Creative Commons Attribution-ShareAlike 4.0 International (CC BY-SA 4.0)**.
 
 Under CC BY-SA 4.0:
+
 - **Attribution (BY)** — if you share or adapt the documentation, you must give appropriate credit to the original authors, provide a link to the license, and indicate whether you made changes.
 - **ShareAlike (SA)** — if you create a derivative work (for example, a translated build guide or a modified assembly instruction), you must release it under the same CC BY-SA 4.0 license.
 
@@ -46,7 +42,7 @@ You can use Yantra Commons documentation for personal projects, educational mate
 ## What You Can Do
 
 | Action | Allowed? | Conditions |
-|---|---|---|
+| --- | --- | --- |
 | Build for personal use | ✅ | None — build freely for yourself |
 | Build and sell | ✅ | Follow the license terms; retain license notices and attribution |
 | Modify the design | ✅ | Share modifications under the same license if using OHL-S or OHL-W; no obligation for OHL-P or MIT |
@@ -58,7 +54,7 @@ You can use Yantra Commons documentation for personal projects, educational mate
 When you share a modified version of a Yantra Commons design — whether as files on GitHub, a product on a maker marketplace, or documentation on a blog — follow these steps:
 
 1. **Keep the original `LICENSE` file.** Include it unmodified in your project repository or product documentation. Do not delete it or replace it with a different license without legal authority to do so.
-2. **Add a note referencing the original project.** In your `README.md` or product page, state clearly that your design is derived from the original Yantra Commons project and link to the original repository. For example: *"Based on [Project Name] by Yantra Commons — https://github.com/yantracommons/project-name"*.
+2. **Add a note referencing the original project.** In your `README.md` or product page, state clearly that your design is derived from the original Yantra Commons project and link to the original repository. For example: _"Based on \[Project Name\] by Yantra Commons — [https://github.com/yantra-commons/project-name](https://github.com/yantra-commons/project-name)"_.
 3. **Retain author credits.** If the original files contain author names or contributor lists in headers or a `CONTRIBUTORS` file, keep them. Add your own name as a subsequent contributor rather than replacing the original credits.
 
 These steps satisfy the attribution requirements of CERN OHL, CC BY-SA, and MIT. For OHL-S and OHL-W, they are the minimum — you must also publish your modified design files under the same license.

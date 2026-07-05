@@ -1,0 +1,62 @@
+---
+title: "Lightning Payment Soundbox — Upcoming Yantra Commons Project"
+sidebarTitle: "Lightning Soundbox"
+description: "An open, affordable ESP32-based soundbox that announces Bitcoin Lightning payment confirmations with a display and multilingual audio — the next Yantra Commons project."
+icon: "bolt"
+tag: "Upcoming"
+---
+
+<Note>
+  The Lightning Payment Soundbox is the **upcoming Yantra Commons project**, currently in active development. Hardware design files, firmware, and build guides will be published in the [Yantra Commons GitHub organisation](https://github.com/yantra-commons) as the project matures.
+</Note>
+
+Payment soundboxes have transformed digital payments for small merchants across India — a speaker on the counter announces each incoming payment out loud, so shopkeepers can confirm payments without stopping to check a phone. The Lightning Payment Soundbox brings that same experience to **Bitcoin Lightning payments**, as fully open hardware anyone can build, repair, and improve.
+
+## What It Does
+
+When a customer pays a Lightning invoice, the soundbox announces the confirmed payment amount out loud and shows it on a built-in display — giving merchants instant, hands-free confirmation at the point of sale.
+
+- **Audible payment confirmations** — spoken amount announcements through an onboard speaker
+- **Multilingual audio** — confirmations in English, Hindi, and Kannada, with more languages planned
+- **Visual confirmation** — a colour TFT display shows payment status and amount
+- **Low-cost, open design** — targeting an affordable bill of materials (~\$17) so it's viable for small merchants
+
+## Hardware at a Glance
+
+| Component | Role |
+| --- | --- |
+| ESP32 | Main microcontroller — Wi-Fi connectivity and application logic |
+| ST7735 TFT display | Colour display for payment status and amounts |
+| MAX98357A I2S DAC | Digital audio output driving the speaker |
+| Speaker | Voice announcements of confirmed payments |
+
+## Software Stack
+
+- **Firmware** for the ESP32 handling display, audio playback, and payment notifications
+- **GGWave audio transmission** for over-the-air data transfer to the device
+- **BTCPay Server plugin** (C# / .NET 8) connecting the soundbox to a merchant's BTCPay Server instance so payment events reach the device
+
+## Why Open Hardware for Payments?
+
+Commercial payment soundboxes are closed devices tied to a single payment provider. When the provider changes terms, ends support, or shuts down, the hardware becomes e-waste. An open soundbox means:
+
+- Merchants own their hardware outright — no rental fees or provider lock-in
+- Anyone can repair a failed unit with off-the-shelf parts
+- The community can add languages, features, and integrations
+- The design can be manufactured locally, anywhere in the world
+
+## Project Support
+
+Development of the Lightning Payment Soundbox is supported through a [Bitshala](https://bitshala.org) developer fellowship. See our [Sponsors](/sponsors) page for everyone who supports Yantra Commons.
+
+## Follow Along
+
+<CardGroup cols={2}>
+  <Card title="Watch on GitHub" icon="github" href="https://github.com/yantra-commons">
+    Watch the Yantra Commons organisation to be notified when the Soundbox repositories go public.
+  </Card>
+
+  <Card title="Get Involved" icon="code-pull-request" href="/contributing/overview">
+    Interested in contributing firmware, enclosure design, translations, or testing? Start with the contributing guide.
+  </Card>
+</CardGroup>
