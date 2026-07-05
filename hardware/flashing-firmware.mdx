@@ -37,7 +37,7 @@ PlatformIO handles toolchain management automatically — it downloads the corre
     Clone the project from the Yantra Commons GitHub organization, replacing `<project-name>` with the actual repository name:
 
     ```bash
-    git clone https://github.com/yantracommons/<project-name>
+    git clone https://github.com/yantra-commons/<project-name>
     ```
   </Step>
   <Step title="Navigate to the firmware directory">
@@ -105,6 +105,7 @@ If you prefer the Arduino IDE, you can use it with most Yantra Commons projects.
     - **Try a different USB port** — some USB hubs and front-panel ports don't supply enough power or have compatibility issues. Plug directly into a rear port on your computer.
     - **Check `FIRMWARE.md`** — it may specify a required button sequence (e.g., holding BOOT while connecting) to put the device into flash mode.
   </Accordion>
+
   <Accordion title="Upload failed: permission denied">
     On Linux, non-root users don't have permission to access serial ports by default. Add your user account to the `dialout` group:
 
@@ -120,6 +121,7 @@ If you prefer the Arduino IDE, you can use it with most Yantra Commons projects.
 
     You should see `dialout` listed. Retry the upload after logging back in.
   </Accordion>
+
   <Accordion title="Firmware compiles but device won't boot">
     If the upload succeeds but the device doesn't start up correctly:
 
@@ -134,9 +136,7 @@ If you prefer the Arduino IDE, you can use it with most Yantra Commons projects.
 After a successful upload, confirm that the firmware is running correctly before closing everything down:
 
 1. **Open the serial monitor** (`pio device monitor` or Arduino IDE Serial Monitor at the baud rate listed in `FIRMWARE.md`) and watch for boot messages. A healthy device typically prints a startup banner, firmware version, and any initialization status within the first few seconds of power-on.
-
 2. **Observe onboard indicators** — many Yantra Commons devices have an LED or other indicator that behaves in a defined way after a successful boot (e.g., a slow blink for idle, a fast blink during initialization). The project README describes what to expect.
-
 3. **Test the core function** — perform the simplest possible test described in the project README to confirm the device is doing what it's supposed to do. This might be as simple as pressing a button and observing a response, or checking that a sensor reading appears in the serial monitor.
 
 If the device behaves as documented, your flash was successful. If something looks wrong, revisit the `FIRMWARE.md` troubleshooting section before opening a GitHub Issue.

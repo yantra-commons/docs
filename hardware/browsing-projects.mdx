@@ -4,11 +4,41 @@ sidebarTitle: "Browse Projects"
 description: "Find Yantra Commons open hardware on GitHub. Filter by category, difficulty, and build cost to choose between open alternatives and original designs."
 ---
 
-All Yantra Commons projects live on GitHub at [https://github.com/yantracommons](https://github.com/yantracommons). Each project is a self-contained repository — you'll find everything you need to build it in one place: schematics, PCB design files, firmware source code, a bill of materials, 3D-printable enclosure files, and a step-by-step build guide. There's no hunting across multiple sites or piecing together information from scattered sources.
+All Yantra Commons projects live on GitHub at [https://github.com/yantra-commons](https://github.com/yantra-commons). Each project is a self-contained repository — you'll find everything you need to build it in one place: schematics, PCB design files, firmware source code, a bill of materials, 3D-printable enclosure files, and a step-by-step build guide. There's no hunting across multiple sites or piecing together information from scattered sources.
+
+## Current Projects
+
+These are the projects currently published in the Yantra Commons organisation:
+
+<CardGroup cols={2}>
+  <Card title="DabBot" icon="fingerprint" href="https://github.com/yantra-commons/DabBot-AndroidApp">
+    An open-source alternative to the SwitchBot Finger Bot — a small actuator that physically presses buttons and switches on existing devices. Works locally over Bluetooth with a dedicated Android control app, no cloud connection required. Hardware files live in [DabBot-Hardware](https://github.com/yantra-commons/DabBot-Hardware).
+  </Card>
+
+  <Card title="ClawClick" icon="keyboard" href="https://github.com/yantra-commons/ClawClick">
+    A programmable macro pad that turns your most-used AI agent prompts into one-press physical actions, eliminating repetitive typing and copy-pasting. Hardware files live in [ClawClick-Hardware](https://github.com/yantra-commons/ClawClick-Hardware).
+  </Card>
+
+  <Card title="volume-knob" icon="volume-high" href="https://github.com/yantra-commons/volume-knob">
+    A plug-and-play USB volume knob built from a \$2 Digispark ATtiny85 and a rotary encoder. No drivers, no configuration — pure USB HID.
+  </Card>
+
+  <Card title="comcom" icon="terminal" href="https://github.com/yantra-commons/comcom">
+    A smart CLI tool, written in Rust, for identifying, monitoring, and managing Arduino and microcontroller COM/serial ports. Available on crates.io.
+  </Card>
+
+  <Card title="Sensor Dashboard" icon="gauge" href="https://github.com/yantra-commons/Sensor-Dashboard">
+    An ESP32-based sensor dashboard that receives sensor data over ESP-NOW and displays it on a web interface hosted by an ESP32 running in Access Point mode.
+  </Card>
+
+  <Card title="Lightning Payment Soundbox" icon="bolt" href="/hardware/lightning-soundbox">
+    **Upcoming.** An affordable, open payment-confirmation soundbox for Bitcoin Lightning payments — ESP32-based, with a TFT display and multilingual audio confirmations. Read more about the project.
+  </Card>
+</CardGroup>
 
 ## Finding Projects on GitHub
 
-Navigate to [https://github.com/yantracommons](https://github.com/yantracommons) to see the full list of repositories. You can browse them alphabetically or use GitHub's search and topic filtering to narrow things down.
+Navigate to [https://github.com/yantra-commons](https://github.com/yantra-commons) to see the full list of repositories. You can browse them alphabetically or use GitHub's search and topic filtering to narrow things down.
 
 Each repository is tagged with one or more **topics** that describe the project. Look for these to filter your search:
 
@@ -18,7 +48,7 @@ Each repository is tagged with one or more **topics** that describe the project.
 - **`intermediate`** — requires some prior soldering and electronics experience
 - **`advanced`** — involves fine-pitch SMD components, complex firmware, or specialized tooling
 
-To filter by topic on GitHub, click any topic tag on a repository page, or go to `https://github.com/topics/<topic-name>` directly (e.g., `https://github.com/topics/open-alternative`). You can also combine search terms in the GitHub search bar — for example, `org:yantracommons topic:beginner` returns all beginner-level projects in the organization.
+To filter by topic on GitHub, click any topic tag on a repository page, or go to `https://github.com/topics/<topic-name>` directly (e.g., `https://github.com/topics/open-alternative`). You can also combine search terms in the GitHub search bar — for example, `org:yantra-commons topic:beginner` returns all beginner-level projects in the organization.
 
 Once you find a repository that looks interesting, open its **README** for a quick overview of what the project is, what it does, and what building it involves.
 
@@ -40,6 +70,7 @@ If any of these details are missing or unclear in a project's README, open a Git
   <Card title="Open Alternatives" icon="lock-open" href="/concepts/open-hardware">
     Open recreations of popular closed-source devices. These projects give you full visibility into — and control over — hardware you'd otherwise have to buy as a sealed black box. Schematics, firmware, and design decisions are all documented and open for modification.
   </Card>
+
   <Card title="Original Designs" icon="microchip" href="/concepts/project-structure">
     Brand-new hardware designed from scratch by the Yantra Commons community. These projects solve problems that no off-the-shelf product addresses well, or explore ideas that simply haven't been built as open hardware before.
   </Card>
@@ -49,10 +80,10 @@ If any of these details are missing or unclear in a project's README, open a Git
 
 Before you commit to a project — ordering parts, printing files, or setting up a build environment — take a few minutes to verify the following:
 
-- [ ] You have every tool listed in the README available on your workbench
-- [ ] You're comfortable with the project's stated difficulty level (or willing to learn what's required)
-- [ ] The components in the BOM are available from suppliers that ship to your region at a reasonable cost
-- [ ] You've read the full `BUILD.md` file, not just the README, so there are no surprises mid-build
+- You have every tool listed in the README available on your workbench
+- You're comfortable with the project's stated difficulty level (or willing to learn what's required)
+- The components in the BOM are available from suppliers that ship to your region at a reasonable cost
+- You've read the full `BUILD.md` file, not just the README, so there are no surprises mid-build
 
 <Tip>
   Star a project on GitHub to save it for later and get notified of updates when new versions or improvements are released. You'll receive a notification whenever the maintainers push a new release, so you'll always know when a build guide has been improved or a design revision is available.

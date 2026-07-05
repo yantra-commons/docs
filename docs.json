@@ -33,6 +33,7 @@
             "group": "Using Our Hardware",
             "pages": [
               "hardware/browsing-projects",
+              "hardware/lightning-soundbox",
               "hardware/sourcing-parts",
               "hardware/assembly",
               "hardware/flashing-firmware"
@@ -52,7 +53,8 @@
             "pages": [
               "resources/faq",
               "resources/glossary",
-              "resources/support"
+              "resources/support",
+              "sponsors"
             ]
           }
         ]
