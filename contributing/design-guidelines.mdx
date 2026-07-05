@@ -1,7 +1,7 @@
 ---
-title: "Hardware Design Guidelines for Yantra Commons"
+title: "Open Hardware Design Guidelines for Yantra Commons"
 sidebarTitle: "Design Guidelines"
-description: "Follow these design guidelines when submitting hardware to Yantra Commons: file formats, naming conventions, schematic quality, BOM requirements, and documentation standards."
+description: "Standards for Yantra Commons submissions: file formats, naming conventions, schematic quality, BOM structure, and required documentation files."
 ---
 
 These guidelines ensure that every Yantra Commons project is consistent, reproducible, and easy for the community to build and improve. Follow them when submitting a new project or when updating an existing one. They apply to schematics, PCB layouts, firmware, enclosures, and documentation alike.
@@ -10,12 +10,12 @@ These guidelines ensure that every Yantra Commons project is consistent, reprodu
 
 | Asset | Required Format | Notes |
 |---|---|---|
-| Schematics | KiCad `.kicad_sch` + PDF export | PDF must be legible at A4/Letter size |
-| PCB Layout | KiCad `.kicad_pcb` + Gerber ZIP | Gerbers must include all copper, mask, silk, drill, and edge-cuts files |
-| BOM | CSV (see columns below) | Must be machine-readable; no merged cells or formatting |
+| Schematics | KiCad `.kicad_sch` + PDF export (`schematic.pdf`) | PDF must be legible at A4/Letter size |
+| PCB Layout | KiCad `.kicad_pcb` + Gerber ZIP (`hardware/gerbers/`) | Gerbers must include all copper, mask, silk, drill, and edge-cuts files |
+| BOM | CSV (`BOM.csv`) — see columns below | Must be machine-readable; no merged cells or formatting |
 | Firmware | Source code, PlatformIO or Arduino IDE compatible | Include `platformio.ini` or a clearly documented build command |
 | Enclosure | STL required; STEP and source file (`.f3d`, `.FCStd`, etc.) recommended | STL must be print-ready with no non-manifold geometry |
-| Build Guide | Markdown `BUILD.md` | Must include photos at each major assembly stage |
+| Build Guide | Markdown (`BUILD.md`) | Must include photos at each major assembly stage |
 
 ## Schematic Quality
 

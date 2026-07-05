@@ -1,7 +1,7 @@
 ---
-title: "Frequently Asked Questions — Yantra Commons"
+title: "Frequently Asked Questions — Yantra Commons Hardware"
 sidebarTitle: "FAQ"
-description: "Answers to common questions about Yantra Commons: what we do, how to use our hardware designs, licensing, contributing, and getting help."
+description: "Answers to common questions about Yantra Commons: what we build, how to use our open hardware designs, licensing, contributing, and getting help."
 ---
 
 This page answers the most common questions from people discovering Yantra Commons for the first time. If your question isn't here, ask in the community forum or open a GitHub Discussion.
@@ -23,7 +23,7 @@ This page answers the most common questions from people discovering Yantra Commo
   <Accordion title="Is Yantra Commons free to use?">
     Yes. All of our designs are free to download, study, modify, and build. You'll never pay Yantra Commons for access to a design file.
 
-    That said, building physical hardware isn't free — you'll need to purchase components, order PCBs from a fabrication house, and source any mechanical parts. The cost depends entirely on the project. Each project's `BOM.csv` lists all required components and suggested suppliers so you can estimate costs before you start.
+    That said, building physical hardware isn't free — you'll need to purchase components, order PCBs from a fabrication house, and source any mechanical parts. The cost depends entirely on the project. Each project's `hardware/BOM.csv` lists all required components and suggested suppliers so you can estimate costs before you start.
   </Accordion>
 
   <Accordion title="Who runs Yantra Commons?">
@@ -68,7 +68,7 @@ This page answers the most common questions from people discovering Yantra Commo
   </Accordion>
 
   <Accordion title="Where do I buy parts?">
-    Each project includes a `BOM.csv` (Bill of Materials) file listing every component with reference designators, values, descriptions, quantities, and supplier part numbers. Common suppliers used in Yantra Commons projects include:
+    Each project includes a `hardware/BOM.csv` (Bill of Materials) file listing every component with reference designators, values, descriptions, quantities, and supplier part numbers. Common suppliers used in Yantra Commons projects include:
 
     - **LCSC** — large selection, competitive pricing, ships internationally
     - **DigiKey** — comprehensive catalog, reliable stock information
@@ -76,7 +76,7 @@ This page answers the most common questions from people discovering Yantra Commo
     - **Robu.in** — popular Indian supplier with fast domestic shipping; good for modules and common components
     - **Evelta, QuartzComponents, Probots** — other Indian options worth checking for common parts
 
-    The BOM typically includes at least one LCSC part number per component since LCSC integrates directly with JLCPCB for assembly orders. Always cross-reference with local suppliers to save on shipping costs if you're sourcing from India.
+    The `hardware/BOM.csv` typically includes at least one LCSC part number per component since LCSC integrates directly with JLCPCB for assembly orders. Always cross-reference with local suppliers to save on shipping costs if you're sourcing from India.
   </Accordion>
 
   <Accordion title="Can I order the PCB from a fab?">
