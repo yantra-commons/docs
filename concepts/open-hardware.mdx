@@ -1,0 +1,54 @@
+---
+title: "What Is Open Source Hardware?"
+sidebarTitle: "Open Hardware"
+description: "Open source hardware means publishing complete design files — schematics, PCBs, firmware, and enclosures — so anyone can study, build, and improve the design."
+---
+
+Open source hardware applies the same principle behind open source software to physical objects: the complete design is made public so anyone can study it, build it, modify it, and share improvements. Just as open source software gives you access to the source code behind a program, open source hardware gives you access to the files behind a physical device — the circuit diagrams, the PCB layouts, the firmware, the enclosure designs, and the instructions to put it all together. If you can read the files and follow the guides, you can build the device yourself, adapt it for a different purpose, or manufacture and sell it under the terms of the license.
+
+## What "Open" Means for Hardware
+
+Publishing a photo of a finished board or a vague block diagram does not make hardware open. For a design to be genuinely open, the following artifacts must be publicly available in their original, editable formats:
+
+- **Schematics** — the circuit diagrams showing every component and how they connect, in both human-readable (PDF) and editable source formats.
+- **PCB layout files** — the Gerber files used to manufacture the board, plus the source project files (such as KiCad `.kicad_pcb`) so the layout can be modified.
+- **Bill of materials (BOM)** — a complete list of every component, its value, its footprint, and a suggested part number or supplier reference.
+- **Firmware source code** — the software that runs on the device, in the original programming language, not just compiled binaries.
+- **Mechanical designs** — 3D files for enclosures and mounting hardware (STEP, STL, or native CAD formats such as Fusion 360 `.f3d`), so the physical housing can be printed, modified, or machined.
+- **Documentation** — build guides, assembly instructions, calibration procedures, and troubleshooting notes that let a person of reasonable skill actually construct and use the device.
+
+Providing all of these is what separates open hardware from hardware that is merely documented.
+
+## The OSHWA Definition
+
+The [Open Source Hardware Association (OSHWA)](https://www.oshwa.org/definition/) maintains the community-agreed definition of open source hardware. In their words, open source hardware is hardware whose design is made publicly available so that anyone can study, modify, distribute, make, and sell the design or hardware based on that design.
+
+OSHWA's definition also specifies that the documentation must be released under a license that allows modification and distribution without restriction, and that the preferred formats for sharing must be those that allow others to actually edit the files — not just view them.
+
+Yantra Commons follows the OSHWA definition in full. Every project we publish meets these criteria before it is released.
+
+## Why It Matters
+
+Open hardware has concrete, practical consequences for the people who use it:
+
+- **You can repair it yourself.** Because you have the full schematic, you can trace a fault, identify a failed component, and replace it without sending the device back to a manufacturer or paying for a proprietary service.
+- **You can modify it for your needs.** If you need a different connector, a different voltage range, or an extra sensor, you have the source files to make that change and fabricate a revised board.
+- **Manufacturers can't lock you out.** There are no hidden firmware blobs, no encrypted update channels, and no deliberate barriers to third-party repair or modification. The design is yours to work with.
+- **Knowledge is shared freely.** Every open hardware project is also a learning resource. You can read the schematic to understand how a circuit works, follow the firmware to understand an algorithm, and build on the accumulated expertise of everyone who contributed before you.
+
+## Open Hardware vs. Open Source Software
+
+Open hardware and open source software share the same philosophy, but the practicalities differ because physical objects have manufacturing costs and physical constraints that software does not.
+
+| Aspect | Open Source Software | Open Source Hardware |
+|---|---|---|
+| **What's shared** | Source code (text files) | Schematics, PCB files, firmware, mechanical files, BOM |
+| **Output** | Executable program (compiled or interpreted) | A physical device you manufacture or purchase |
+| **Tools to build** | Compiler, interpreter, build system | PCB fab house, soldering equipment, 3D printer, programming tools |
+| **Community action** | Fork the repo, submit a pull request | Fork the repo, fab a revised board, document and share the changes |
+
+The key difference is cost and friction: copying software is essentially free, but fabricating a PCB or printing an enclosure takes time and money. That said, the philosophical commitment is identical — the design is open, the knowledge is shared, and you are free to build on it.
+
+<Tip>
+  Open hardware doesn't mean "free as in beer" — it means free as in freedom. You can build it, sell it, and modify it as long as you follow the license terms.
+</Tip>

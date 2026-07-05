@@ -1,0 +1,93 @@
+---
+title: "Submit a New Open Hardware Project"
+sidebarTitle: "Submit a Project"
+description: "Learn how to submit a new hardware design to Yantra Commons: repository setup, required files, the review process, and what happens after your project is accepted."
+---
+
+If you've designed open hardware you want to share with the Yantra Commons community, this guide walks you through submitting it for inclusion in the organisation. Whether it's a finished product-quality design or a solid working prototype, the community is ready to help you polish and publish it.
+
+## What We Accept
+
+Yantra Commons publishes hardware in two categories:
+
+**Open Alternatives**
+
+These are open-source replacements for specific closed-source or proprietary devices — think open alternatives to commercial sensor modules, development boards, or test equipment. To qualify:
+
+- The project must target a specific closed-source device by name.
+- It must be functionally equivalent to or better than the device it replaces.
+- It must not infringe any trademarks, trade dress, or other intellectual property of the original manufacturer.
+
+**Original Designs**
+
+These are novel hardware projects that don't replicate an existing product. To qualify:
+
+- The project must not duplicate a design already covered in the Yantra Commons library.
+- It must have a clear and well-described use case — who builds it, and what problem does it solve?
+
+If your project fits either category, read on.
+
+## Setting Up Your Repository
+
+<Steps>
+  <Step title="Fork or create a new public GitHub repository">
+    Your repository must be public and hosted on GitHub. You can fork an existing Yantra Commons project as a base, or start a new repository from scratch.
+  </Step>
+  <Step title="Structure it according to the standard project layout">
+    Organise your files following the [standard project structure](/concepts/project-structure). This ensures maintainers and community members can navigate your repo immediately.
+  </Step>
+  <Step title="Ensure all required files are present">
+    Check that your repository includes all mandatory files described in the [Design Guidelines](/contributing/design-guidelines) — schematics, PCB layout, BOM, BUILD.md, and LICENSE at minimum.
+  </Step>
+  <Step title="Add an open license">
+    All Yantra Commons hardware must be released under an open license. Recommended options include the CERN Open Hardware Licence (OHL-W or OHL-S), MIT (for firmware and software), and CC BY-SA 4.0 (for documentation). Include the full license text as a `LICENSE` file in the repository root.
+  </Step>
+  <Step title="Write a clear README.md">
+    Your README must include the project name, a description of what it does, the difficulty level (Beginner / Intermediate / Advanced), and an estimated build cost. A photo or render of the finished hardware at the top of the README makes a strong first impression.
+  </Step>
+</Steps>
+
+## The Review Process
+
+<Steps>
+  <Step title="Open a GitHub Discussion with your project proposal">
+    In the [yantracommons GitHub organisation](https://github.com/yantracommons), open a new Discussion with the title format: **[Project Proposal] Your Project Name**.
+  </Step>
+  <Step title="Include key information in your proposal">
+    Your proposal should contain a brief description of the project, photos or renders of the hardware (even a prototype is fine), and a link to your draft repository so reviewers can examine the files directly.
+  </Step>
+  <Step title="Engage with community feedback">
+    Community members and maintainers will review your proposal and provide feedback on design choices, component selection, documentation completeness, and fit within the library. Respond to questions and iterate on your design as needed.
+  </Step>
+  <Step title="Receive maintainer approval">
+    Once the community discussion reaches a positive consensus, a maintainer will formally approve the proposal. They will either help you transfer the repository into the yantracommons organisation or fork it there and set you up as a collaborator.
+  </Step>
+  <Step title="Your project is published">
+    Your project goes live in the Yantra Commons project library. It is listed on the website and available for the community to build, improve, and build upon.
+  </Step>
+</Steps>
+
+## What Happens After Acceptance
+
+Once your project is part of the Yantra Commons library:
+
+- The repository is maintained jointly by you and the broader community — you remain the primary point of contact for design decisions.
+- Yantra Commons links to your project from the main project library and any relevant category pages.
+- You retain full credit as the original designer in the repository's history and documentation.
+- Future improvements from other contributors arrive as pull requests, which you are invited to review and merge.
+
+## Checklist Before Submitting
+
+Run through this checklist before opening your project proposal:
+
+- ✅ All required files are present (schematics, PCB layout, BOM, BUILD.md, FIRMWARE.md if applicable, LICENSE)
+- ✅ DRC passes with zero errors in KiCad
+- ✅ BOM is complete with LCSC part numbers (DigiKey/Mouser numbers recommended)
+- ✅ BUILD.md is complete and includes photos at each major assembly stage
+- ✅ LICENSE file is present and uses an approved open license
+- ✅ README includes difficulty level, estimated cost, and tools required
+- ✅ Firmware builds and flashes successfully, with instructions documented in FIRMWARE.md
+
+<Tip>
+  You don't need a finished, polished project to start the proposal process. A working prototype with draft documentation is enough to begin the community discussion. Early feedback often saves significant rework later.
+</Tip>

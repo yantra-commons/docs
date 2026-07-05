@@ -1,0 +1,175 @@
+---
+title: "Frequently Asked Questions — Yantra Commons"
+sidebarTitle: "FAQ"
+description: "Answers to common questions about Yantra Commons: what we do, how to use our hardware designs, licensing, contributing, and getting help."
+---
+
+This page answers the most common questions from people discovering Yantra Commons for the first time. If your question isn't here, ask in the community forum or open a GitHub Discussion.
+
+---
+
+## About Yantra Commons
+
+<AccordionGroup>
+  <Accordion title="What is Yantra Commons?">
+    Yantra Commons is an open-source hardware nonprofit based in Bengaluru, India. We publish fully open hardware designs — schematics, PCB layouts, firmware, 3D-printable enclosures, and build guides — across two categories:
+
+    1. **Open alternatives to proprietary hardware** — drop-in or functional replacements for closed-source devices, designed so you own and understand every part of what you build.
+    2. **Original innovative designs** — new tools, instruments, and devices created by our community and released openly for anyone to build, modify, and improve.
+
+    Everything we publish is released under open licenses. Our mission is to make high-quality hardware knowledge freely available to everyone.
+  </Accordion>
+
+  <Accordion title="Is Yantra Commons free to use?">
+    Yes. All of our designs are free to download, study, modify, and build. You'll never pay Yantra Commons for access to a design file.
+
+    That said, building physical hardware isn't free — you'll need to purchase components, order PCBs from a fabrication house, and source any mechanical parts. The cost depends entirely on the project. Each project's `BOM.csv` lists all required components and suggested suppliers so you can estimate costs before you start.
+  </Accordion>
+
+  <Accordion title="Who runs Yantra Commons?">
+    Yantra Commons is run by a volunteer community of makers, engineers, and educators. There is no full-time paid staff. The organization is structured as a nonprofit, which means there are no shareholders and any resources go toward the mission rather than profit.
+
+    Our core contributors are primarily based in Bengaluru, but community members contribute from across India and around the world. Anyone can contribute a design, improve documentation, or help others in the community forums — regardless of where they're located.
+  </Accordion>
+
+  <Accordion title="Do you sell finished products?">
+    No. Yantra Commons publishes designs — we don't manufacture or sell assembled hardware. Our role is to make sure the designs are well-documented, tested, and openly licensed so that you can build the hardware yourself.
+
+    If you need help building something and don't yet have the skills or equipment, the community forum is a good place to find local makers who may be able to assist. Some community members also offer assembly services independently, though Yantra Commons itself does not endorse or coordinate those arrangements.
+  </Accordion>
+</AccordionGroup>
+
+---
+
+## Using the Hardware
+
+<AccordionGroup>
+  <Accordion title="I'm a beginner — can I build these projects?">
+    Absolutely. Many projects in the Yantra Commons catalog are designed with beginners in mind and are tagged **Beginner** in the project index. These projects use through-hole components (easier to solder by hand), include detailed step-by-step build guides, and have been tested by community members with limited prior experience.
+
+    Start with a Beginner-tagged project, take your time with the build guide, and don't hesitate to ask questions in the community forum. The community is welcoming and accustomed to helping people who are just getting started.
+  </Accordion>
+
+  <Accordion title="What tools do I need?">
+    The tools required vary by project — each build guide includes a "Tools Required" section near the top. In general, you should expect to need:
+
+    - **Soldering iron** — a temperature-controlled iron is strongly recommended (Hakko, TS100, or similar)
+    - **Solder** — 60/40 or lead-free, 0.6–0.8 mm diameter
+    - **Multimeter** — for checking continuity, voltage, and diagnosing problems
+    - **Flush cutters and tweezers**
+    - **Computer** — for flashing firmware via USB
+
+    Some projects also call for:
+    - **3D printer** — for enclosures (STL files are provided; alternatively, use a local print service)
+    - **Oscilloscope** — for advanced debugging on more complex projects
+    - **Hot air station** — for SMD rework, if applicable
+
+    If a project requires any specialized or expensive tooling, this is called out clearly in the build guide.
+  </Accordion>
+
+  <Accordion title="Where do I buy parts?">
+    Each project includes a `BOM.csv` (Bill of Materials) file listing every component with reference designators, values, descriptions, quantities, and supplier part numbers. Common suppliers used in Yantra Commons projects include:
+
+    - **LCSC** — large selection, competitive pricing, ships internationally
+    - **DigiKey** — comprehensive catalog, reliable stock information
+    - **Mouser** — good for industrial and higher-spec components
+    - **Robu.in** — popular Indian supplier with fast domestic shipping; good for modules and common components
+    - **Evelta, QuartzComponents, Probots** — other Indian options worth checking for common parts
+
+    The BOM typically includes at least one LCSC part number per component since LCSC integrates directly with JLCPCB for assembly orders. Always cross-reference with local suppliers to save on shipping costs if you're sourcing from India.
+  </Accordion>
+
+  <Accordion title="Can I order the PCB from a fab?">
+    Yes. Every Yantra Commons project includes production-ready Gerber files located at `hardware/gerbers/` in the project repository. These files are all you need to order a PCB from a fabrication house.
+
+    Common choices used by our community:
+
+    - **JLCPCB** — very popular, low cost, fast turnaround, ships to India
+    - **PCBWay** — good for more advanced boards, ENIG finish, controlled impedance
+    - **OSH Park** — US-based, quality purple boards, longer lead times
+
+    Upload the Gerber ZIP to your chosen fab's website, review the preview carefully before ordering, and check that the board dimensions and layer count match what's described in the project README.
+  </Accordion>
+
+  <Accordion title="My firmware upload is failing — what do I do?">
+    Firmware upload failures are usually caused by one of a small number of issues. Work through these steps in order:
+
+    1. **Check your USB cable.** Many USB cables are charge-only and do not carry data. Try a different cable — ideally one you've already confirmed works for data transfer with another device.
+    2. **Install the correct serial drivers.** Depending on the USB-to-serial chip on your board (CH340, CP2102, or FTDI FT232), you may need to install drivers manually. Links to the correct drivers are provided in each project's `FIRMWARE.md`.
+    3. **Select the correct board in PlatformIO.** Open `platformio.ini` and verify that the `board` setting matches your actual hardware variant.
+    4. **Check the serial port.** Confirm that your operating system has detected the device and that PlatformIO is targeting the right port.
+    5. **Try entering bootloader mode manually.** Some boards require you to hold the BOOT button while pressing RESET, or to short specific pins before uploading. Check the project's `FIRMWARE.md` for board-specific instructions.
+
+    If none of these resolve the issue, open a GitHub Discussion with the exact error message copied from the terminal output.
+  </Accordion>
+</AccordionGroup>
+
+---
+
+## Licensing & Legal
+
+<AccordionGroup>
+  <Accordion title="Can I sell a product based on a Yantra Commons design?">
+    Yes, in most cases you can. Yantra Commons releases hardware designs under CERN Open Hardware Licence (CERN OHL) variants, all of which permit commercial use. Check the `LICENSE` file in the specific project repository to confirm which variant applies.
+
+    Whichever variant is used, you must comply with its terms — which typically include providing attribution to the original design and, depending on the variant, making your modified design files available. Read the license carefully before launching a commercial product.
+  </Accordion>
+
+  <Accordion title="Do I need to share my modifications?">
+    It depends on which license variant the project uses:
+
+    - **CERN-OHL-S (Strongly Reciprocal)** — Yes. If you manufacture and distribute a product based on this design, you must release your modified design files under the same license. This is a copyleft ("share-alike") requirement.
+    - **CERN-OHL-W (Weakly Reciprocal)** — Yes, for modifications to the covered design itself. You may combine it with other components without triggering the share-alike requirement on those other components.
+    - **CERN-OHL-P (Permissive)** — No. You are free to modify the design without being required to publish your changes.
+
+    The `LICENSE` file in each project repository specifies which variant applies. When in doubt, read the full license text — it is written to be understandable, not just legalese.
+  </Accordion>
+
+  <Accordion title="Can I use the designs in a commercial product?">
+    Yes. All CERN OHL variants permit commercial use. You do not need to pay a licensing fee to Yantra Commons, and you do not need to request special permission.
+
+    You do need to:
+    - **Attribute** the original Yantra Commons design appropriately (as specified in the license)
+    - **Comply** with the share-alike requirements if using an -S or -W variant
+    - **Not misrepresent** your product as coming from or being endorsed by Yantra Commons
+
+    If you're building a commercial product and have specific questions about compliance, the CERN OHL documentation and FAQs are good resources. For complex legal questions, consult a qualified attorney.
+  </Accordion>
+</AccordionGroup>
+
+---
+
+## Contributing
+
+<AccordionGroup>
+  <Accordion title="How do I submit my own design?">
+    See the full guide at [/contributing/submitting-a-project](/contributing/submitting-a-project). In brief:
+
+    1. Make sure your design is complete and has been tested on real hardware
+    2. Organize your files following the [project structure](/concepts/project-structure) conventions
+    3. Choose an appropriate open license (CERN OHL variant)
+    4. Open a pull request in the Yantra Commons GitHub organization with your project directory
+    5. A maintainer will review the submission and leave feedback
+
+    First-time contributors are welcome to open a GitHub Discussion before starting to get early feedback on whether a project fits the catalog.
+  </Accordion>
+
+  <Accordion title="Can I improve an existing project?">
+    Yes — improvements to existing projects are very welcome. Fork the relevant repository, make your changes, and open a pull request describing what you changed and why. Please include:
+
+    - A clear description of the problem you're solving or the improvement you're making
+    - Any test results if you've built and verified the change on hardware
+    - Updated documentation if your change affects assembly, firmware, or usage
+
+    For significant changes — like a full board revision — it's worth opening an issue or Discussion first to align with the maintainers before investing a lot of time.
+  </Accordion>
+
+  <Accordion title="I found a mistake in a build guide — what do I do?">
+    Please report it so it can be fixed for everyone. You have two options:
+
+    - **Open an issue** in the relevant project's GitHub repository. Describe the error clearly: what the guide says, what it should say, and (if possible) which step or section is affected.
+    - **Open a pull request** with the correction directly. Documentation fixes are the easiest kind of contribution and are very much appreciated.
+
+    Even small errors — typos, wrong pin labels, missing steps — are worth reporting. Someone newer than you will benefit from the fix.
+  </Accordion>
+</AccordionGroup>

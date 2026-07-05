@@ -1,47 +1,85 @@
 ---
-title: "Quickstart"
-description: "Begin with a guide on the fastest path to a successful outcome"
+title: "Get Started with Yantra Commons Hardware"
+sidebarTitle: "Quick Start"
+description: "Learn how to find, source parts for, assemble, and flash a Yantra Commons open hardware project in five straightforward steps."
 ---
 
-Describe how someone begins using your product. What is the first thing they need to do? Are there any prerequisites?
+This guide walks you through the complete process of building a Yantra Commons device — from choosing a project that matches your skills and budget, to holding a working, flashed board in your hands. You don't need prior experience with every tool in the chain, but you should read each step in full before you start. The five steps below apply to every project in the Yantra Commons library.
 
-A quickstart should take someone from zero to using your product. They'll get a quick win and a sense of what they can accomplish.
-
-## Prerequisites
-
-Before you begin, you must have:
-
-- Requirement one (for example, Node.js 18+, a free account, an API key)
-- Requirement two (for example, a compatible device, a compatible browser, a compatible operating system)
-
-## Get started
+<Warning>
+  Always verify your power supply voltage and polarity before connecting a newly assembled board. Incorrect voltage can permanently damage components.
+</Warning>
 
 <Steps>
-  <Step title="Install">
-    Describe how to install your product or sign up.
+  <Step title="Find a Project">
+    Browse the Yantra Commons project library on GitHub at [github.com/yantracommons](https://github.com/yantracommons). Each repository is named after the device it contains. Open the `README.md` of any project to find a summary of what the device does, its difficulty level (Beginner / Intermediate / Advanced), and an estimated build cost in USD. Filter by the topic tags on the GitHub organisation page to narrow results by category — for example, `open-alternative`, `test-equipment`, or `audio`.
 
-    ```bash
-    npm install your-package
-    ```
+    Pick a project whose difficulty level matches your current skills. If you're new to hardware assembly, start with a Beginner-rated project; they are designed to use through-hole components and require only basic soldering.
   </Step>
-  <Step title="Configure">
-    Describe any setup or configuration needed before first use.
+  <Step title="Read the Build Guide">
+    Every Yantra Commons project includes either a `BUILD.md` file in the repository root or a `docs/` folder with more detailed assembly documentation. Read the entire build guide before ordering a single component.
 
-    ```bash
-    your-cli init
-    ```
+    Pay close attention to the **Tools Required** section. Depending on the project, you may need some combination of the following:
+
+    - Soldering iron and solder (lead-free recommended)
+    - Multimeter for continuity and voltage checks
+    - 3D printer for the enclosure (or access to a print service)
+    - Hot air station for SMD rework, if applicable
+    - USB-to-UART adapter or programmer for firmware flashing
+
+    The build guide also notes any steps where mistakes are easy to make and hard to reverse — read those sections twice.
   </Step>
-  <Step title="Run it">
-    Show the first thing a user does to see it working.
+  <Step title="Source Your Parts">
+    Download the `BOM.csv` file from the project repository. This is a structured bill of materials listing every component, its value or part number, the required quantity, and the reference designator matching the schematic.
 
-    ```bash
-    your-cli start
-    ```
+    Use the BOM to order components from suppliers. Commonly used suppliers with broad international availability include:
+
+    - **LCSC** — cost-effective for most passives and common ICs, ships globally
+    - **DigiKey** — wide selection, reliable stock data, good for harder-to-find parts
+    - **Mouser** — strong on connectors, semiconductors, and industrial components
+    - **Local electronics shops** — often faster and cheaper for common resistors, capacitors, and through-hole components
+
+    Order a small quantity of extras for passive components (resistors, capacitors, LEDs). They are inexpensive and easy to lose or damage during assembly.
+  </Step>
+  <Step title="Assemble the Hardware">
+    Follow the assembly instructions in `BUILD.md` or the `docs/` folder step by step. Keep the schematic (`schematic.pdf`) and PCB layout open alongside you — cross-reference them whenever you're unsure about a component placement or orientation.
+
+    A few practices that prevent the most common assembly errors:
+
+    - **Check polarities before soldering** — electrolytic capacitors, diodes, and ICs all have a correct orientation; the silkscreen and schematic both mark it
+    - **Solder in order of component height** — start with the lowest-profile components (resistors, diodes) and work up to connectors and tall capacitors
+    - **Inspect joints under good lighting** — a cold or bridged solder joint is the most common cause of a board that doesn't power on correctly
+    - **Do not apply power until assembly is complete** — verify the board visually against the BOM and schematic before your first power-on
+
+    If you have a multimeter, do a continuity check between VCC and GND before applying power. A short here means something is wrong and needs to be found before you connect a supply.
+  </Step>
+  <Step title="Flash the Firmware">
+    Clone the firmware repository linked in the project's `README.md`. Each project includes a `FIRMWARE.md` file that covers the full flashing process: which toolchain to install, how to configure the build environment, and the exact command or script to use for flashing.
+
+    The general process follows this pattern:
+
+    1. Install the required toolchain (e.g., `avr-gcc`, the ESP-IDF, or the Arduino CLI — specified in `FIRMWARE.md`)
+    2. Clone the firmware repository and install any declared dependencies
+    3. Edit the config file if the project requires board-specific settings (pin assignments, clock speed, etc.)
+    4. Run the provided flash script, or follow the manual flashing instructions in `FIRMWARE.md`
+    5. Open a serial monitor at the baud rate specified in `FIRMWARE.md` to verify the device boots and reports expected output
+
+    If the device doesn't respond after flashing, `FIRMWARE.md` includes a troubleshooting section covering the most common failure modes.
   </Step>
 </Steps>
 
-<Tip>
-  Give people a way to get help. This could be a link to a support page, a chat with a customer support agent, or a forum for your product.
+## What's Next?
 
-  Example: Need help? Reach out to us at [support@yourcompany.com](mailto:support@yourcompany.com).
-</Tip>
+Now that you have a working device, here are the natural next steps — whether you want to explore more projects, dig into sourcing, or contribute back to the community.
+
+<CardGroup cols={3}>
+  <Card title="Browse Projects" icon="magnifying-glass" href="/hardware/browsing-projects">
+    Explore the full Yantra Commons project library, filtered by category, difficulty level, and estimated build cost.
+  </Card>
+  <Card title="Sourcing Parts" icon="cart-shopping" href="/hardware/sourcing-parts">
+    Learn how to read a BOM, find reliable suppliers, handle substitutions, and order PCBs from fabrication services.
+  </Card>
+  <Card title="Contributing" icon="code-pull-request" href="/contributing/overview">
+    Submit improvements to an existing project, report a bug in a design, or propose a brand-new piece of open hardware.
+  </Card>
+</CardGroup>

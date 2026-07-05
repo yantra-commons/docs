@@ -1,0 +1,71 @@
+---
+title: "Sourcing Parts for Your Yantra Commons Build"
+sidebarTitle: "Sourcing Parts"
+description: "Use the project BOM to order components from LCSC, DigiKey, Mouser, or local suppliers. Tips for finding affordable parts in India and internationally."
+---
+
+Every Yantra Commons project includes a `BOM.csv` (bill of materials) inside the `hardware/` folder of its repository. This file lists every component you need to purchase, along with quantities, part numbers for major suppliers, and any special notes about substitutions or sourcing. Before you place a single order, download the BOM and read it completely — it's the single source of truth for what goes into your build.
+
+## Reading the BOM
+
+The `BOM.csv` is structured as a spreadsheet with one row per unique component. Open it in any spreadsheet application or a text editor. The columns are:
+
+| Column | Description |
+|---|---|
+| **Reference** | The component designator on the PCB (e.g., R1, C3, U1, J2) |
+| **Component** | A human-readable description of the part |
+| **Value** | The electrical value or part identifier (e.g., 10kΩ, 100nF, ATmega328P) |
+| **Footprint** | The PCB land pattern (e.g., 0402, SOT-23, DIP-28) |
+| **Quantity** | How many of this component are needed for one complete build |
+| **LCSC Part #** | The LCSC catalog number for direct ordering |
+| **DigiKey Part #** | The DigiKey catalog number for direct ordering |
+| **Notes** | Substitution options, polarity warnings, or sourcing tips |
+
+Here's a sample of what a typical Yantra Commons BOM looks like:
+
+| Reference | Component | Value | Footprint | Quantity | LCSC Part # | DigiKey Part # | Notes |
+|---|---|---|---|---|---|---|---|
+| R1, R2, R3 | Resistor | 10kΩ 1% 0.1W | 0402 | 3 | C25804 | 311-10.0KCRCT-ND | Standard pull-up; any 1% tolerance acceptable |
+| C1, C2 | Ceramic Capacitor | 100nF 50V X7R | 0402 | 2 | C49678 | 399-8010-1-ND | Decoupling; do not substitute Y5V |
+| U1 | Microcontroller | ATmega328P-AU | TQFP-32 | 1 | C14877 | ATMEGA328P-AU-ND | Must be -AU (surface mount) variant |
+| J1 | USB Connector | USB Type-C Receptacle | USB-C-SMD | 1 | C165948 | 2073-USB4135-GF-ACT-ND | Check orientation before soldering |
+
+## Recommended Suppliers
+
+Use this table to decide where to order based on your location and what you need:
+
+| Supplier | Region | Best For | Website |
+|---|---|---|---|
+| **LCSC** | Global | Cheap bulk passives and common ICs; large catalog; ships from China | [lcsc.com](https://www.lcsc.com) |
+| **DigiKey** | Global | Wide selection of all component types; detailed datasheets; reliable stock data | [digikey.com](https://www.digikey.com) |
+| **Mouser** | Global | Wide selection; strong on industrial and higher-spec components; good for India orders | [mouser.in](https://www.mouser.in) |
+| **Robu.in** | India | Modules, development boards, sensors, and wires; fast domestic shipping | [robu.in](https://robu.in) |
+| **Evelta** | India | Discrete components, ICs, and connectors; India-stocked inventory | [evelta.com](https://www.evelta.com) |
+| **SP Road / Lamington Road** | India (Bengaluru / Mumbai) | Walk-in local sourcing; useful for last-minute parts or small quantities | In-person only |
+
+For most builds, ordering passives (resistors, capacitors) from LCSC and any specialized ICs from DigiKey or Mouser covers the majority of your BOM. If you're based in India and want to avoid international shipping wait times, Robu.in and Evelta together can often cover the module and component needs for simpler projects.
+
+## Ordering PCBs
+
+You don't need to manufacture PCBs yourself. The `hardware/gerbers/` folder in each project repository contains a ready-to-upload Gerber archive (typically a `.zip` file) that you send directly to a PCB fabrication service.
+
+Recommended PCB fabs:
+
+- **[JLCPCB](https://jlcpcb.com)** — Very low cost for prototype quantities (5 boards for ~$2 USD); ships from China; typically 7–10 days to India with standard shipping
+- **[PCBWay](https://www.pcbway.com)** — Slightly higher cost than JLCPCB but more finish and material options; good for more demanding designs
+- **[PCB Power](https://www.pcbpower.com)** — India-based fab; no international shipping wait; useful when you need boards quickly within India; turnaround typically 3–7 business days
+
+For a standard 2-layer board under 100×100 mm, expect to pay ₹500–₹1,500 for a 5-board run from a Chinese fab (including standard shipping), or ₹800–₹2,500 from an Indian fab depending on specifications.
+
+<Info>
+  JLCPCB and LCSC are affiliated companies — you can order PCB fabrication and component assembly together in a single transaction directly from JLCPCB. Upload your Gerber files for fabrication, then upload the project's BOM and pick-and-place (CPL) files from the `hardware/` folder to have JLCPCB populate the SMD components for you. This is especially cost-effective for builds with many small SMD parts.
+</Info>
+
+## Tips to Save Money
+
+A few habits that meaningfully reduce the cost of a Yantra Commons build:
+
+- **Order the fab minimum** — most fabs sell PCBs in packs of 5 at nearly the same price as a single board. Order 5, keep the spares for future builds or to share with community members.
+- **Buy passives in small reels from LCSC** — a reel of 100 × 10kΩ 0402 resistors costs almost the same as buying 5. Once you have a stock of common passives, future builds cost significantly less.
+- **Source what you can locally** — connectors, switches, wire, and common through-hole components can often be found at SP Road (Bengaluru) or Lamington Road (Mumbai) for less than international shipping alone would cost you.
+- **Group-order with other community members** — check the Yantra Commons community forums or GitHub Discussions to find others planning the same build. Splitting a component order across multiple builders reduces per-person shipping costs, especially for orders from DigiKey or Mouser.

@@ -1,0 +1,61 @@
+---
+title: "Browse and Find Open Hardware Projects"
+sidebarTitle: "Browse Projects"
+description: "Discover Yantra Commons open hardware designs on GitHub. Learn how to filter by difficulty, category, and build cost to find the right project for you."
+---
+
+All Yantra Commons projects live on GitHub at [https://github.com/yantracommons](https://github.com/yantracommons). Each project is a self-contained repository — you'll find everything you need to build it in one place: schematics, PCB design files, firmware source code, a bill of materials, 3D-printable enclosure files, and a step-by-step build guide. There's no hunting across multiple sites or piecing together information from scattered sources.
+
+## Finding Projects on GitHub
+
+Navigate to [https://github.com/yantracommons](https://github.com/yantracommons) to see the full list of repositories. You can browse them alphabetically or use GitHub's search and topic filtering to narrow things down.
+
+Each repository is tagged with one or more **topics** that describe the project. Look for these to filter your search:
+
+- **`open-alternative`** — a fully open recreation of a popular closed-source or proprietary device
+- **`original-design`** — a brand-new hardware design created by the Yantra Commons community
+- **`beginner`** — suitable for those new to electronics and PCB assembly
+- **`intermediate`** — requires some prior soldering and electronics experience
+- **`advanced`** — involves fine-pitch SMD components, complex firmware, or specialized tooling
+
+To filter by topic on GitHub, click any topic tag on a repository page, or go to `https://github.com/topics/<topic-name>` directly (e.g., `https://github.com/topics/open-alternative`). You can also combine search terms in the GitHub search bar — for example, `org:yantracommons topic:beginner` returns all beginner-level projects in the organization.
+
+Once you find a repository that looks interesting, open its **README** for a quick overview of what the project is, what it does, and what building it involves.
+
+## What the README Tells You
+
+Every Yantra Commons project README is structured consistently so you can evaluate a project at a glance. Before diving into the design files, check the README for:
+
+- **Project name and description** — what the device is, what it does, and why it exists
+- **Difficulty level** — rated Beginner, Intermediate, or Advanced
+- **Estimated build cost** — listed in both USD and INR so builders in India and internationally can budget accurately
+- **Required tools** — a list of everything you'll need on your workbench (soldering iron, multimeter, 3D printer, etc.)
+- **Estimated build time** — how many hours a typical builder should expect to spend from parts-in-hand to finished device
+
+If any of these details are missing or unclear in a project's README, open a GitHub Issue on that repository — accurate READMEs are a community priority.
+
+## Project Categories
+
+<CardGroup cols={2}>
+  <Card title="Open Alternatives" icon="lock-open">
+    Open recreations of popular closed-source devices. These projects give you full visibility into — and control over — hardware you'd otherwise have to buy as a sealed black box. Schematics, firmware, and design decisions are all documented and open for modification.
+  </Card>
+  <Card title="Original Designs" icon="microchip">
+    Brand-new hardware designed from scratch by the Yantra Commons community. These projects solve problems that no off-the-shelf product addresses well, or explore ideas that simply haven't been built as open hardware before.
+  </Card>
+</CardGroup>
+
+## Before You Clone
+
+Before you commit to a project — ordering parts, printing files, or setting up a build environment — take a few minutes to verify the following:
+
+- [ ] You have every tool listed in the README available on your workbench
+- [ ] You're comfortable with the project's stated difficulty level (or willing to learn what's required)
+- [ ] The components in the BOM are available from suppliers that ship to your region at a reasonable cost
+- [ ] You've read the full `BUILD.md` file, not just the README, so there are no surprises mid-build
+
+<Tip>
+  Star a project on GitHub to save it for later and get notified of updates when new versions or improvements are released. You'll receive a notification whenever the maintainers push a new release, so you'll always know when a build guide has been improved or a design revision is available.
+</Tip>
+
+Once you've found a project and confirmed it's a good fit, head over to the [Quickstart](/quickstart) to get your local environment set up and start building.

@@ -1,0 +1,146 @@
+---
+title: "Flashing Firmware onto Your Yantra Commons Device"
+sidebarTitle: "Flashing Firmware"
+description: "Install firmware on your Yantra Commons device using PlatformIO or the Arduino IDE. Covers toolchain setup, building, and uploading to common microcontrollers."
+---
+
+Every Yantra Commons project that includes a microcontroller ships with full firmware source code in the `firmware/` directory of its repository. You're not flashing a pre-compiled binary — you're building the firmware from source, which means you can read every line of code that runs on your device, modify it, and contribute improvements back to the project. This page covers how to set up the necessary toolchain, build the firmware, and upload it to your assembled hardware.
+
+## Prerequisites
+
+Before you begin, make sure you have the following ready:
+
+- **Assembled and tested hardware** — complete the build and run the pre-power-on continuity checks described in the [Assembly guide](/hardware/assembly) before connecting your device to a computer
+- **USB cable** — check the project README for the exact connector type required (USB-C, Micro-USB, Mini-USB, etc.). Many devices will not appear as USB ports if you're using a charge-only cable that omits the data lines.
+- **Python 3.x** — required by PlatformIO. Verify with `python3 --version` in your terminal.
+- **PlatformIO CLI or Arduino IDE** — see the sections below for installation instructions. PlatformIO is recommended for all Yantra Commons projects.
+
+## Using PlatformIO (Recommended)
+
+PlatformIO handles toolchain management automatically — it downloads the correct compiler, libraries, and board definitions for your project without manual configuration.
+
+<Steps>
+  <Step title="Install the PlatformIO CLI">
+    Install PlatformIO using pip:
+
+    ```bash
+    pip install platformio
+    ```
+
+    After installation, verify it's available:
+
+    ```bash
+    pio --version
+    ```
+  </Step>
+  <Step title="Clone the project repository">
+    Clone the project from the Yantra Commons GitHub organization, replacing `<project-name>` with the actual repository name:
+
+    ```bash
+    git clone https://github.com/yantracommons/<project-name>
+    ```
+  </Step>
+  <Step title="Navigate to the firmware directory">
+    Move into the `firmware/` subdirectory of the cloned repository:
+
+    ```bash
+    cd <project-name>/firmware
+    ```
+
+    This directory contains `platformio.ini`, which tells PlatformIO everything it needs to know about the target board and build configuration.
+  </Step>
+  <Step title="Connect your device via USB">
+    Plug your assembled device into your computer using the correct USB cable. On Linux and macOS, it typically appears as `/dev/ttyUSB0` or `/dev/ttyACM0`. On Windows, check Device Manager for the assigned COM port.
+  </Step>
+  <Step title="Build and upload the firmware">
+    Run the following command to compile the firmware and upload it to your device in one step:
+
+    ```bash
+    pio run --target upload
+    ```
+
+    PlatformIO will download any missing toolchain components on the first run, compile the source code, and flash the resulting binary to your device over USB.
+  </Step>
+  <Step title="Monitor serial output (optional)">
+    Many Yantra Commons devices print status messages and debug output over their serial port at startup. To view these messages:
+
+    ```bash
+    pio device monitor
+    ```
+
+    The baud rate and other settings are defined in `platformio.ini`, so PlatformIO picks the correct configuration automatically. Press `Ctrl+C` to exit the monitor.
+  </Step>
+</Steps>
+
+## Using the Arduino IDE
+
+If you prefer the Arduino IDE, you can use it with most Yantra Commons projects. Check the project's `FIRMWARE.md` to confirm Arduino IDE support before proceeding — some projects use PlatformIO-only features.
+
+<Steps>
+  <Step title="Install Arduino IDE 2.x">
+    Download and install Arduino IDE 2.x from [arduino.cc/en/software](https://www.arduino.cc/en/software). Version 2.x is required; the older 1.x releases are no longer supported for most modern boards.
+  </Step>
+  <Step title="Install the required board package">
+    Open the Arduino IDE, go to **File → Preferences**, and add any required board manager URLs listed in the project's `FIRMWARE.md`. Then go to **Tools → Board → Boards Manager** and install the board package specified in `FIRMWARE.md` (for example, `esp32` by Espressif, or `Arduino AVR Boards`).
+  </Step>
+  <Step title="Open the firmware sketch">
+    In the Arduino IDE, go to **File → Open** and navigate to the `firmware/src/` directory inside the cloned project repository. Open the `.ino` file you find there.
+  </Step>
+  <Step title="Select the correct board and port">
+    Go to **Tools → Board** and select the exact board variant listed in `FIRMWARE.md`. Then go to **Tools → Port** and select the COM port or `/dev/tty*` device that corresponds to your connected hardware.
+  </Step>
+  <Step title="Upload the firmware">
+    Click the **Upload** button (the right-arrow icon) in the Arduino IDE toolbar. The IDE will compile the sketch and flash it to your device. Watch the output panel at the bottom of the window — a successful upload ends with `Done uploading.`
+  </Step>
+</Steps>
+
+## Common Issues
+
+<AccordionGroup>
+  <Accordion title="Device not detected">
+    If your computer doesn't recognize the device when you plug it in:
+
+    - **Check the USB cable** — many USB cables are charge-only and omit the data lines entirely. Try a different cable that you know works for data transfer (e.g., one you've used to transfer files to a phone).
+    - **Install USB-to-serial drivers** — many microcontroller boards use a CH340 or CP2102 USB-to-UART bridge chip. On Windows, these often require a driver that isn't installed by default. Search for "CH340 driver" or "CP2102 driver" and install the appropriate one for your chip.
+    - **Try a different USB port** — some USB hubs and front-panel ports don't supply enough power or have compatibility issues. Plug directly into a rear port on your computer.
+    - **Check `FIRMWARE.md`** — it may specify a required button sequence (e.g., holding BOOT while connecting) to put the device into flash mode.
+  </Accordion>
+  <Accordion title="Upload failed: permission denied">
+    On Linux, non-root users don't have permission to access serial ports by default. Add your user account to the `dialout` group:
+
+    ```bash
+    sudo usermod -a -G dialout $USER
+    ```
+
+    Then **log out and log back in** (or reboot) for the group change to take effect. Verify the change worked with:
+
+    ```bash
+    groups $USER
+    ```
+
+    You should see `dialout` listed. Retry the upload after logging back in.
+  </Accordion>
+  <Accordion title="Firmware compiles but device won't boot">
+    If the upload succeeds but the device doesn't start up correctly:
+
+    - **Verify the board variant** — open `platformio.ini` (or check the Arduino IDE board selection) and confirm that the `board` field matches the exact variant of the microcontroller on your PCB. For example, an ESP32-S3 and an ESP32-WROOM are not interchangeable in firmware configuration even though they look similar.
+    - **Check power supply voltage** — use your multimeter to measure the voltage on the 3.3V and/or 5V rails on the board while the device is powered. Confirm they match the expected values from the schematic.
+    - **Read the serial output** — connect to the device monitor (`pio device monitor` or Arduino IDE Serial Monitor) and look for any error or panic messages printed at boot. These often pinpoint the problem exactly.
+  </Accordion>
+</AccordionGroup>
+
+## Verifying the Flash
+
+After a successful upload, confirm that the firmware is running correctly before closing everything down:
+
+1. **Open the serial monitor** (`pio device monitor` or Arduino IDE Serial Monitor at the baud rate listed in `FIRMWARE.md`) and watch for boot messages. A healthy device typically prints a startup banner, firmware version, and any initialization status within the first few seconds of power-on.
+
+2. **Observe onboard indicators** — many Yantra Commons devices have an LED or other indicator that behaves in a defined way after a successful boot (e.g., a slow blink for idle, a fast blink during initialization). The project README describes what to expect.
+
+3. **Test the core function** — perform the simplest possible test described in the project README to confirm the device is doing what it's supposed to do. This might be as simple as pressing a button and observing a response, or checking that a sensor reading appears in the serial monitor.
+
+If the device behaves as documented, your flash was successful. If something looks wrong, revisit the `FIRMWARE.md` troubleshooting section before opening a GitHub Issue.
+
+<Note>
+  The `FIRMWARE.md` file inside each project's `firmware/` folder contains project-specific flashing instructions. Always read it before following the general steps on this page — it may list additional configuration steps, required library versions, or a specific button sequence needed to enter bootloader mode on that particular device.
+</Note>

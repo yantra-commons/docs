@@ -1,0 +1,137 @@
+---
+title: "Get Help with Yantra Commons Projects"
+sidebarTitle: "Support"
+description: "Find help for your Yantra Commons build: GitHub Issues for bugs, community discussions for general questions, and tips for diagnosing common hardware and firmware problems."
+---
+
+Yantra Commons is a community-supported project. There's no paid support, but the community is active and helpful. This page explains where to get help and how to ask good questions.
+
+<Note>
+  Yantra Commons has no paid support staff. Response times depend on community availability. Complex questions may take a few days to get a thorough answer — patience is appreciated.
+</Note>
+
+---
+
+## Where to Get Help
+
+<CardGroup cols={2}>
+  <Card title="GitHub Issues" icon="circle-dot" href="https://github.com/yantracommons">
+    For bugs, design errors, and missing or incorrect documentation in a specific project. Open an issue in the relevant project repository — not the central org page — so the right maintainers are notified.
+  </Card>
+  <Card title="GitHub Discussions" icon="comments" href="https://github.com/orgs/yantracommons/discussions">
+    For general questions, build help, part sourcing advice, and anything that isn't a clear, reproducible bug. This is the right place to ask "why isn't this working?" before you're sure it's a design problem.
+  </Card>
+</CardGroup>
+
+---
+
+## How to Ask a Good Question
+
+A well-formed question gets answered faster and helps others who run into the same problem later. Before posting, work through these steps:
+
+<Steps>
+  <Step title="Identify the specific project and version">
+    Check the repository's release tags or README to find the version you're working from. Include this in your question — behavior and file contents can differ significantly between versions.
+  </Step>
+  <Step title="Describe what you expected vs. what actually happened">
+    Be concrete. "It doesn't work" gives a reader nothing to go on. "I expected the LED on pin PA5 to blink at 1 Hz, but it stays off" gives them something to investigate.
+  </Step>
+  <Step title="Share relevant error messages verbatim">
+    Copy and paste error output directly from your terminal, serial monitor, or IDE. Do not paraphrase. The exact wording of an error message is often the fastest path to a solution.
+  </Step>
+  <Step title="Include your environment details">
+    State your operating system (e.g., Ubuntu 22.04, Windows 11, macOS 14), your PlatformIO or toolchain version, and the programmer or flasher you're using (e.g., onboard USB-serial, J-Link, ST-Link). Problems are often environment-specific.
+  </Step>
+  <Step title="Link to where you got stuck">
+    Include a link to the specific build step, section of documentation, or line of firmware where the problem occurs. This saves responders from having to read through an entire guide to find the relevant context.
+  </Step>
+</Steps>
+
+---
+
+## Common Hardware Problems
+
+<AccordionGroup>
+  <Accordion title="Board won't power on">
+    Work through these checks before concluding there's a fault in the design:
+
+    - **Check your power supply voltage.** Verify with a multimeter that your supply is providing the correct voltage (e.g., 5 V or 3.3 V as specified in the project README). A supply that reads correctly unloaded may sag under load.
+    - **Check polarity.** Confirm that positive and ground are connected to the correct pads. Many boards include polarity protection, but not all.
+    - **Look for solder bridges near the power input.** Use a magnifier or phone camera to inspect the area around the power connector, voltage regulator, and decoupling capacitors. A bridge between VCC and GND is a common cause of boards that draw excessive current and fail to start.
+    - **Check the fuse.** Some boards include a polyfuse or blade fuse on the power input. Measure across the fuse to verify it hasn't blown (you should read near 0 Ω when it's healthy).
+    - **Check the polarity protection diode.** If the board includes a reverse-polarity protection diode (Schottky or P-channel MOSFET), verify it hasn't failed short or open.
+  </Accordion>
+
+  <Accordion title="Component gets hot immediately">
+    Power off immediately. Heat indicates a significant problem — continued operation can permanently damage components.
+
+    Once the board is off:
+
+    - **Check for reversed components.** Electrolytic capacitors, Schottky diodes, and ICs installed backwards are common causes of immediate heat. Cross-reference the silkscreen polarity markings against your BOM and the component's datasheet.
+    - **Check for solder bridges.** Bridges between power and ground pins of any IC will cause it to become very hot very quickly. Inspect all IC power pins carefully.
+    - **Verify your power supply voltage.** If your supply voltage is too high for the board's rated input, the regulator or protection circuit will dissipate the excess as heat — and may fail.
+    - **Identify which component is heating.** Touch components briefly after a very short power-on (under one second) to find the hottest one. That's your starting point for investigation.
+  </Accordion>
+
+  <Accordion title="Intermittent behavior / random resets">
+    Intermittent problems are typically caused by power instability or poor mechanical connections.
+
+    - **Check power supply stability under load.** Use a multimeter in DC voltage mode to measure VCC while the board is operating. A stable 3.3 V supply should not deviate by more than ±50 mV under normal operation. If it's sagging or spiking, your supply may be undersized or your decoupling capacitors may be improperly soldered.
+    - **Inspect for cold solder joints.** Cold joints appear dull and granular rather than shiny and smooth. They may make intermittent contact that fails under vibration or thermal expansion. Reflow any suspicious joints.
+    - **Check connector contacts.** Intermittent connections on JST or pin headers are common. Reseat all connectors and check that pin contacts are not bent or oxidized.
+    - **Check for loose through-hole component leads.** A lead that wasn't trimmed and is making incidental contact with another pad or trace can cause random behavior.
+  </Accordion>
+</AccordionGroup>
+
+---
+
+## Common Firmware Problems
+
+<AccordionGroup>
+  <Accordion title="'Port not found' error">
+    This error means your computer can't see the board's USB-to-serial interface. Try these steps:
+
+    - **Install the correct serial driver.** Check the project's `FIRMWARE.md` or the silkscreen on the board to identify the USB-to-serial chip. Common options:
+      - **CH340 / CH341** — [WCH CH340 driver](https://www.wch-ic.com/downloads/CH341SER_EXE.html)
+      - **CP2102 / CP2104** — [Silicon Labs CP210x driver](https://www.silabs.com/developers/usb-to-uart-bridge-vcp-drivers)
+      - **FT232R / FT232H** — [FTDI VCP driver](https://ftdichip.com/drivers/vcp-drivers/)
+    - **Check your USB cable.** Replace it with a known-good data cable. Charge-only cables are a surprisingly common cause of this error.
+    - **Try a different USB port.** Avoid USB hubs when flashing firmware; connect directly to a port on your computer.
+    - **Check Device Manager (Windows) or `dmesg` / `ls /dev/tty*` (Linux/macOS)** to confirm whether the OS has detected the device at all.
+  </Accordion>
+
+  <Accordion title="Build fails with missing library">
+    PlatformIO manages library dependencies through the `lib_deps` key in `platformio.ini`. If a library is missing, try these steps:
+
+    1. Navigate to the `firmware/` directory of the project in your terminal.
+    2. Run `pio lib install` to install all libraries declared in `platformio.ini`.
+    3. If a specific library is still missing, check the `lib_deps` section of `platformio.ini` and install it manually: `pio lib install "LibraryName"` or by registry ID.
+    4. If you've recently updated PlatformIO, run `pio upgrade` and `pio update` to refresh your toolchain and registry cache.
+
+    If the build still fails after installing all dependencies, copy the full error output and open a GitHub Discussion — it may indicate a version incompatibility that a maintainer needs to address.
+  </Accordion>
+
+  <Accordion title="Device boots but behaves incorrectly">
+    If the firmware uploads successfully but the device doesn't behave as expected:
+
+    - **Re-read the project's `FIRMWARE.md` carefully.** Many projects require post-flash configuration steps: setting calibration values, connecting to Wi-Fi, or configuring parameters via a serial console. These steps are easy to miss.
+    - **Verify the correct board variant is selected.** Open `platformio.ini` and confirm the `board` and `board_build.variants` (if present) settings match your exact hardware revision. Using the wrong variant can result in incorrect pin mappings and unexpected behavior.
+    - **Re-flash a clean image.** Erase the device's flash memory completely before re-uploading. PlatformIO supports full erase via `pio run --target erase` for most targets. Residual data from a previous firmware version can sometimes interfere with a new upload.
+    - **Check the serial monitor.** Open the serial monitor at the baud rate specified in `FIRMWARE.md` (typically 115200). Most Yantra Commons firmware prints diagnostic information at startup that can help pinpoint what's wrong.
+  </Accordion>
+</AccordionGroup>
+
+---
+
+## Reporting a Design Error
+
+If you find a mistake in a schematic, PCB layout, or build guide — a wrong pin number, an incorrect component value, a missing step, or a mislabeled silkscreen — please report it so it can be corrected for everyone.
+
+To report a design error:
+
+1. Open an **Issue** in the relevant project's GitHub repository (not the central org page).
+2. Include **'Design Error'** in the issue title so it's easy to triage (e.g., *"Design Error: R12 value incorrect in schematic v1.2"*).
+3. Describe the error precisely: what the design currently shows, what it should show, and the practical consequence if someone follows the design as-is.
+4. Link to the specific file and, if applicable, the line number or page — for example, a direct link to the `.kicad_sch` file on GitHub with a line anchor, or a reference to a specific step in the build guide.
+
+Even if you're not certain it's an error — if something looks wrong or contradicts information elsewhere in the project — open an issue anyway. It's far better to ask and be wrong than to stay silent and let others hit the same problem.

@@ -1,0 +1,93 @@
+---
+title: "Assembling a Yantra Commons Hardware Project"
+sidebarTitle: "Assembly"
+description: "Step-by-step assembly tips for Yantra Commons projects: required tools, reading schematics and PCB layouts, soldering, and testing your board before first power-on."
+---
+
+Assembly involves populating a PCB with components, installing the populated board into an enclosure (if the project includes one), and systematically verifying the build before you apply power for the first time. This page covers general assembly best practices that apply across all Yantra Commons projects. Always read your project's `BUILD.md` alongside this guide — it contains any project-specific steps, caveats, or assembly sequences that override the general guidance here.
+
+## Tools You'll Need
+
+| Tool | Purpose | Required? |
+|---|---|---|
+| **Soldering iron** (fine tip, temperature-controlled) | Soldering all PCB components | Required |
+| **Solder** (60/40 tin-lead or lead-free) | Forming solder joints | Required |
+| **Flux** (no-clean paste or liquid) | Improving solder flow and joint quality | Recommended |
+| **Multimeter** | Continuity checks, voltage measurement, short detection | Required |
+| **Tweezers** (fine-tip SMD tweezers) | Placing and holding SMD components during soldering | For SMD builds |
+| **Hot air station** | Reflowing solder paste; removing/installing QFP or BGA packages | For QFP/BGA packages |
+| **Magnifier / loupe** (10× or USB microscope) | Inspecting SMD solder joints for bridges and cold joints | For SMD inspection |
+| **3D printer** | Printing the project enclosure | Optional (enclosure only) |
+
+If you don't own a hot air station and your project includes QFP or BGA components, consider using a PCB assembly service (such as JLCPCB's assembly option) for those parts rather than attempting hand-soldering.
+
+## Reading the Schematic
+
+The `hardware/` folder of every Yantra Commons project contains a `schematic.pdf` — a human-readable circuit diagram showing how all the components are electrically connected. Before you place a single component on the board, spend a few minutes with the schematic to understand the circuit at a high level.
+
+When reading the schematic, look for:
+
+- **Power rails** — lines labeled `3V3`, `5V`, `VCC`, or `VBAT` show where power flows. Trace them to understand what's powering what.
+- **Ground symbols** — the triangle or horizontal-line ground symbol (GND) should appear frequently. Every component in the circuit ultimately connects back to ground.
+- **Component designators** — labels like `U1`, `R3`, `C12`, and `J1` correspond directly to the silkscreen labels printed on the physical PCB, connecting the schematic to the board.
+- **Net names** — named signal lines (e.g., `TX`, `SCL`, `NRST`) tell you what signal a given wire carries. Nets with the same name are electrically connected even if they're not drawn with a physical line between them.
+
+You don't need to fully understand every part of the schematic before you start assembling, but knowing the power topology and being able to identify component designators will make assembly and debugging much easier.
+
+## Reading the PCB Layout
+
+The PCB layout file shows you where each component is physically located on the board. Open `pcb.kicad_pcb` in [KiCad](https://www.kicad.org/) (free and open-source), or refer to the `pcb-layout.pdf` included in the `hardware/` folder if you don't want to install KiCad.
+
+When examining the layout, identify:
+
+- **Component outlines** — the silkscreen layer shows the outline and designator (e.g., `U1`, `C3`) for each component, indicating exactly where it goes
+- **Polarity markers** — electrolytic capacitors have a `+` marking on the positive pad; ICs and diodes have a dot or notch on pin 1. Match these markers carefully to your physical components before soldering.
+- **Silkscreen labels** — connector pinouts (e.g., `GND`, `3V3`, `TX`, `RX`) are often printed directly on the board to help you identify connections during assembly and debugging
+
+If you're working with a physical board for the first time, it helps to print the layout PDF at 1:1 scale and lay your components on top to verify placement before soldering anything.
+
+## Assembly Order
+
+Follow this sequence for a clean, inspectable build. Soldering smaller, lower-profile components first prevents taller components from blocking access to pads later.
+
+<Steps>
+  <Step title="Solder SMD passives first">
+    Start with the smallest, flattest SMD components: resistors, ceramic capacitors, and small diodes. Work from the center of the board outward. Use flux liberally and inspect each joint as you go.
+  </Step>
+  <Step title="Solder SMD ICs and larger SMD components">
+    Move on to SOT-23 transistors, voltage regulators, and any larger ICs (SOIC, TQFP, etc.). Tack down one pin first to hold the component in place, verify alignment, then solder the remaining pins.
+  </Step>
+  <Step title="Solder through-hole components">
+    Install through-hole connectors, electrolytic capacitors, crystals, and any larger discrete components. Insert each component, bend the leads slightly to hold it in place, flip the board, and solder from the back.
+  </Step>
+  <Step title="Install modules and headers">
+    Press-fit or solder any pin headers, socket headers, or plug-in modules (e.g., ESP32 modules, display connectors, antenna connectors). If a module needs to be removable, use socket headers rather than soldering it directly.
+  </Step>
+  <Step title="Inspect all solder joints under magnification">
+    Before any electrical testing, examine every joint under a loupe or magnifier. Look for solder bridges between adjacent pads, cold joints (dull or grainy appearance), and any joints that didn't wet properly.
+  </Step>
+  <Step title="Continuity check before power-on">
+    Set your multimeter to continuity mode. Check that VCC and GND are not shorted to each other. Verify that key signal nets connect where the schematic says they should. Only proceed to powering on the board after this check passes cleanly.
+  </Step>
+</Steps>
+
+<Warning>
+  Always check component polarity — especially electrolytic capacitors, diodes, and ICs — before soldering. Reversing polarity can permanently damage components and is one of the most common beginner mistakes. Double-check the `+` marker on capacitors and the pin-1 dot or notch on ICs against the silkscreen on your PCB every time.
+</Warning>
+
+<Tip>
+  Tin both the pad and the component lead separately before joining them together. This "pre-tinning" technique ensures both surfaces are already coated with fresh solder, producing cleaner, more reliable joints with less heat applied to the component.
+</Tip>
+
+## Printing and Installing the Enclosure
+
+If the project includes a `enclosure/` folder, it contains one or more `.stl` files ready for 3D printing. Open the `.stl` in your preferred slicer — [Ultimaker Cura](https://ultimaker.com/software/ultimaker-cura) and [PrusaSlicer](https://www.prusa3d.com/prusaslicer/) are both free and work well.
+
+Recommended slicer settings for most Yantra Commons enclosures:
+
+- **Layer height:** 0.2 mm (good balance of speed and surface quality)
+- **Infill:** 20% (sufficient for most indoor enclosures; increase to 40% if the enclosure is load-bearing)
+- **Material:** PLA for indoor, room-temperature applications; PETG if the enclosure may see elevated temperatures or humidity
+- **Supports:** Check the `enclosure/README.md` — some designs are support-free, others require supports for overhangs
+
+After printing, clean up any stringing or support artifacts with flush cutters and light sandpaper before test-fitting the PCB. The `enclosure/README.md` describes how the board mounts — whether with M2/M3 screws, snap-fit clips, or press-fit standoffs.

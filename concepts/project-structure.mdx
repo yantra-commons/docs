@@ -1,0 +1,79 @@
+---
+title: "Yantra Commons Project Structure Explained"
+sidebarTitle: "Project Structure"
+description: "Every Yantra Commons project follows a standard repository layout — learn what each folder and file contains so you can navigate any project confidently."
+---
+
+Every Yantra Commons project lives in its own GitHub repository and follows a consistent directory structure. Whether you are looking at a power supply design, a sensor module, or a custom development board, the folders and files are always arranged the same way. That consistency means you always know where to find the schematic, where the firmware lives, and where to read the build guide — no matter which project you open.
+
+## Standard Repository Layout
+
+```text
+project-name/
+├── hardware/
+│   ├── schematic.pdf          # Human-readable circuit diagram
+│   ├── schematic.kicad_sch    # KiCad schematic source
+│   ├── pcb.kicad_pcb          # KiCad PCB layout
+│   ├── gerbers/               # Fabrication files for PCB manufacture
+│   └── BOM.csv                # Bill of materials
+├── firmware/
+│   ├── src/                   # Firmware source code
+│   ├── platformio.ini         # PlatformIO build config
+│   └── FIRMWARE.md            # Flashing instructions
+├── enclosure/
+│   ├── enclosure.step         # STEP file for CAD tools
+│   ├── enclosure.stl          # STL for 3D printing
+│   └── enclosure.f3d          # Fusion 360 source (when available)
+├── docs/
+│   └── BUILD.md               # Step-by-step assembly guide
+├── LICENSE                    # Open license (CERN OHL, CC, etc.)
+└── README.md                  # Project overview, difficulty, cost
+```
+
+## Folder Descriptions
+
+<AccordionGroup>
+  <Accordion title="hardware/ — Electrical design files">
+    The `hardware/` folder contains everything related to the circuit and PCB. You'll find the human-readable schematic as a PDF (`schematic.pdf`) alongside the editable KiCad source (`schematic.kicad_sch`). The PCB layout is stored as `pcb.kicad_pcb`, which you can open in KiCad to inspect copper layers, component placement, and routing.
+
+    The `gerbers/` subfolder holds the fabrication files you send to a PCB manufacturer — these are the industry-standard Gerber files plus drill files. The `BOM.csv` lists every component on the board with its value, footprint, and a reference designator so you can cross-check it against the schematic.
+  </Accordion>
+
+  <Accordion title="firmware/ — Software that runs on the device">
+    The `firmware/` folder contains all the code that runs on the device's microcontroller or processor. Source files live under `src/` and are written in C, C++, or MicroPython depending on the project. The `platformio.ini` file defines the build environment — target board, framework, and dependencies — so you can compile and flash the firmware using PlatformIO without manual configuration.
+
+    The `FIRMWARE.md` file walks you through flashing the compiled binary onto the device, including any required drivers, programmer hardware, or bootloader steps.
+  </Accordion>
+
+  <Accordion title="enclosure/ — 3D mechanical files">
+    The `enclosure/` folder holds the mechanical design for the device's physical housing. `enclosure.stl` is ready to send directly to a 3D printer or an online print service. `enclosure.step` is a neutral CAD exchange format that you can open in Fusion 360, FreeCAD, SolidWorks, or any other CAD tool to inspect dimensions or make modifications. Where available, `enclosure.f3d` is the native Fusion 360 source file with full parametric history, making it easier to adapt the design.
+  </Accordion>
+
+  <Accordion title="docs/ — Build and usage guides">
+    The `docs/` folder contains human-readable guides. `BUILD.md` is the primary assembly guide — it walks you through the build step by step, from inspecting your components to testing the finished device. Some projects include additional files here such as calibration guides, usage notes, or troubleshooting references.
+  </Accordion>
+</AccordionGroup>
+
+## Key Files at a Glance
+
+| File | Purpose |
+|---|---|
+| `README.md` | Project overview — what the device does, estimated build difficulty, approximate cost, and links to key resources |
+| `BOM.csv` | Complete bill of materials — every component, its value, footprint, and suggested part number |
+| `schematic.pdf` | Human-readable circuit diagram — use this to understand the circuit or trace a fault without installing any software |
+| `gerbers/` | PCB fabrication files — send this folder directly to a PCB manufacturer such as JLCPCB or PCBWay |
+| `BUILD.md` | Step-by-step assembly guide — covers component placement, soldering, enclosure assembly, and first-power checks |
+| `LICENSE` | The open license that governs the project — specifies what you can do with the design and under what conditions |
+
+## Tools You'll Need
+
+Depending on what you want to do with a project, you'll use some or all of the following tools:
+
+- **[KiCad](https://www.kicad.org/)** — open source EDA suite for viewing and editing schematics (`.kicad_sch`) and PCB layouts (`.kicad_pcb`). Free to download and runs on Windows, macOS, and Linux.
+- **[PlatformIO](https://platformio.org/) or [Arduino IDE](https://www.arduino.cc/en/software)** — for compiling and flashing firmware. PlatformIO is recommended because the `platformio.ini` file already configures the correct environment for each project.
+- **[Cura](https://ultimaker.com/software/ultimaker-cura/) or [PrusaSlicer](https://www.prusa3d.com/prusaslicer/)** — slicing software to prepare `.stl` files for 3D printing. Both are free and support most consumer printers.
+- **A text editor** — for reading Markdown files (`README.md`, `BUILD.md`, `FIRMWARE.md`) and the `BOM.csv`. Any editor works; [VS Code](https://code.visualstudio.com/) gives you Markdown preview out of the box.
+
+<Note>
+  Not every project has an enclosure. If the `enclosure/` folder is absent, the device is either bare-board or uses a standard off-the-shelf case.
+</Note>

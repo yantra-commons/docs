@@ -1,13 +1,11 @@
 {
-  "$schema": "https://mintlify.com/docs.json",
-  "name": "Yantra Commons",
+  "projectType": "general",
+  "projectName": "Yantra Commons",
+  "projectDescription": "An open-source hardware nonprofit building fully open, community-driven alternatives to closed-source and proprietary hardware — complete with schematics, PCB designs, firmware, enclosures, and build guides.",
   "theme": "palm",
-  "colors": {
-    "primary": "#ef7025",
-    "light": "#eec9bc",
-    "dark": "#4fa1ab"
-  },
-  "favicon": "/favicon.svg",
+  "primaryColor": "#ef7025",
+  "lightColor": "#eec9bc",
+  "darkColor": "#4fa1ab",
   "navigation": {
     "tabs": [
       {
@@ -59,15 +57,20 @@
       }
     ]
   },
-  "navbar": {
-    "primary": {
-      "type": "github",
-      "href": "https://github.com/yantracommons"
-    }
-  },
-  "footer": {
-    "socials": {
-      "github": "https://github.com/yantracommons"
-    }
-  }
+  "keyFeatures": [
+    "Fully open-source hardware designs (schematics, PCBs, BOM, enclosures)",
+    "Firmware source code published under open licenses",
+    "Step-by-step build guides for every project",
+    "Community-driven alternatives to closed-source / planned-obsolescence products",
+    "3D-printable enclosure files",
+    "Open licensing for personal and commercial use",
+    "Based in Bengaluru, India — globally accessible"
+  ],
+  "publicApiSurface": [
+    "Project repository structure (schematics, PCB files, BOM, firmware, enclosures, build guide)",
+    "Open Hardware licensing model (CERN OHL / CC BY-SA)",
+    "Community contribution workflow (fork → design → PR → review → publish)",
+    "Firmware flashing instructions per device",
+    "Parts sourcing and BOM format"
+  ]
 }
